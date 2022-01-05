@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+
+</head>
+
+<body>
+    <span id='ds'></span>
+    <button>点击+1</button>
+    <script>
+        // 节流:在规定的间隔时间范围内不会重复触发回调，
+        // 只有大于这个时间间隔才会触发回调，把频繁触发变为少量触发
+        let span = document.querySelector('#ds');
+        let button = document.querySelector('button');
+        let num = 0;
+        // button.onclick = function () {
+        //     num++;
+        //     span.innerHTML = num;
+        // }
+        button.onclick = _.throttle(function () {
+            num++;
+            span.innerHTML = num;
+        }, 5000)
+    </script>
+</body>
+
+</html>
