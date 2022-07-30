@@ -8,21 +8,22 @@
           <div class="all-sort-list2">
             <div
               class="item"
-              v-for="(category, index) in categoryList"
+              v-for="(category, index) in categoryList.slice(0, 16)"
               :key="category.id"
             >
               <h3
                 @mouseenter="changeIndex(index)"
                 :class="{
-                  hover_bcg: currentIndex == index
+                  hover_bcg: currentIndex == index,
                 }"
               >
                 <a
                   :data-categoryName="category.categoryName"
                   :data-category1Id="category.categoryId"
                   href=""
-                  >{{ category.categoryName }}</a
                 >
+                  {{ category.categoryName }}
+                </a>
               </h3>
               <div class="item-list clearfix">
                 <div class="subitem">
@@ -36,8 +37,9 @@
                         href=""
                         :data-categoryName="categoryTwo.categoryName"
                         :data-category2Id="categoryTwo.categoryId"
-                        >{{ categoryTwo.categoryName }}</a
                       >
+                        {{ categoryTwo.categoryName }}
+                      </a>
                     </dt>
                     <dd>
                       <em
@@ -48,8 +50,9 @@
                           :data-categoryName="categoryChildThree.categoryName"
                           :data-category3Id="categoryChildThree.categoryId"
                           href=""
-                          >{{ categoryChildThree.categoryName }}</a
                         >
+                          {{ categoryChildThree.categoryName }}
+                        </a>
                       </em>
                     </dd>
                   </dl>
@@ -81,7 +84,7 @@ export default {
   data() {
     return {
       currentIndex: -1,
-      showTypeNav: false
+      showTypeNav: false,
     };
   },
   mounted() {
@@ -94,19 +97,14 @@ export default {
     }, 20),
     // 去搜索页
     goSearch(e) {
-      let {
-        category1id,
-        category2id,
-        category3id,
-        categoryname
-      } = e.target.dataset;
+      let { category1id, category2id, category3id, categoryname } = e.target.dataset;
 
       if (categoryname) {
         let location = {
           name: 'search',
           query: {
-            categoryName: categoryname
-          }
+            categoryName: categoryname,
+          },
         };
         if (category1id) {
           location.query.category1Id = category1id;
@@ -129,15 +127,15 @@ export default {
     // 进入typenav
     enterTpyeNav() {
       if (this.$route.path != '/home') this.showTypeNav = true;
-    }
+    },
   },
   computed: {
     ...mapState({
       categoryList(state) {
         return state.home.categoryList;
-      }
-    })
-  }
+      },
+    }),
+  },
 };
 </script>
 

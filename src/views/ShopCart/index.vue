@@ -11,11 +11,7 @@
         <div class="cart-th6">操作</div>
       </div>
       <div class="cart-body">
-        <ul
-          class="cart-list"
-          v-for="cartInfo in cartInfoList"
-          :key="cartInfo.id"
-        >
+        <ul class="cart-list" v-for="cartInfo in cartInfoList" :key="cartInfo.id">
           <li class="cart-list-con1">
             <input
               type="checkbox"
@@ -35,36 +31,26 @@
             <span class="price">{{ cartInfo.skuPrice }}.00</span>
           </li>
           <li class="cart-list-con5">
-            <a
-              href="javascript:void(0)"
-              class="mins"
-              @click="handler('decrease', -1, cartInfo)"
-              >-</a
-            >
+            <a href="javascript:void(0)" class="mins" @click="handler('decrease', -1, cartInfo)">
+              -
+            </a>
             <input
               autocomplete="off"
               type="text"
               :value="cartInfo.skuNum"
               minnum="1"
               class="itxt"
-              @change="
-                handler('inputChange', $event.target.value * 1, cartInfo)
-              "
+              @change="handler('inputChange', $event.target.value * 1, cartInfo)"
             />
-            <a
-              href="javascript:void(0)"
-              class="plus"
-              @click="handler('increase', 1, cartInfo)"
-              >+</a
-            >
+            <a href="javascript:void(0)" class="plus" @click="handler('increase', 1, cartInfo)">
+              +
+            </a>
           </li>
           <li class="cart-list-con6">
             <span class="sum">{{ cartInfo.skuPrice * cartInfo.skuNum }}</span>
           </li>
           <li class="cart-list-con7">
-            <a href="#none" class="sindelet" @click="deleteCart(cartInfo)"
-              >删除</a
-            >
+            <a href="#none" class="sindelet" @click="deleteCart(cartInfo)">删除</a>
             <br />
             <a href="#none">移到收藏</a>
           </li>
@@ -76,8 +62,9 @@
         <input
           class="chooseAll"
           type="checkbox"
-          :checked="isAllChecked"
+          :checked="isAllChecked && cartInfoList.length > 0"
           @change="allChecked"
+          :disabled="cartInfoList.length === 0"
         />
         <span>全选</span>
       </div>
@@ -87,19 +74,19 @@
         <a href="#none">清除下柜商品</a>
       </div>
       <div class="money-box">
-        <div class="chosed">已选择 <span>0</span>件商品</div>
+        <div class="chosed">
+          已选择
+          <span>0</span>
+          件商品
+        </div>
         <div class="sumprice">
           <em>总价（不含运费） ：</em>
           <i class="summoney">{{ totalPrice }}</i>
         </div>
         <div class="sumbtn">
-          <a
-            class="sum-btn"
-            href="###"
-            target="_blank"
-            @click.prevent="$router.push('/trade')"
-            >结算</a
-          >
+          <a class="sum-btn" href="###" target="_blank" @click.prevent="$router.push('/trade')">
+            结算
+          </a>
         </div>
       </div>
     </div>
@@ -139,7 +126,7 @@ export default {
       try {
         await this.$store.dispatch('getAddToCart', {
           skuId: cart.skuId,
-          skuNum: newNum
+          skuNum: newNum,
         });
         this.getCart();
       } catch (error) {
@@ -163,7 +150,7 @@ export default {
       try {
         await this.$store.dispatch('updateCheckedById', {
           skuId: cart.skuId,
-          isChecked
+          isChecked,
         });
         this.getCart();
       } catch (error) {
@@ -190,7 +177,7 @@ export default {
       } catch (error) {
         alert(error.message);
       }
-    }
+    },
   },
   computed: {
     ...mapGetters(['cartList']),
@@ -200,14 +187,14 @@ export default {
     // 合计总价格
     totalPrice() {
       let sum = 0;
-      this.cartInfoList.forEach((item) => (sum += item.skuNum * item.skuPrice));
+      this.cartInfoList.forEach(item => (sum += item.skuNum * item.skuPrice));
       return sum;
     },
     // 全选
     isAllChecked() {
-      return this.cartInfoList.every((item) => item.isChecked == 1);
-    }
-  }
+      return this.cartInfoList.every(item => item.isChecked == 1);
+    },
+  },
 };
 </script>
 

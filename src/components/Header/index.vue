@@ -57,38 +57,38 @@
 
 <script>
 export default {
-  name: 'Header',
+  name: "Header",
   data() {
     return {
-      keyword: ''
+      keyword: "",
     };
   },
   computed: {
     // 用户信息
     userInfo() {
       return this.$store.state.user.userInfo;
-    }
+    },
   },
   methods: {
     // 搜索
     goSearch() {
       let location = {
-        name: 'search',
+        name: "search",
         params: {
-          keyword: this.keyword || undefined
-        }
+          keyword: this.keyword || undefined,
+        },
       };
       let { query } = this.$route;
       if (query) location.query = query;
       this.$router.push(location);
     },
     logout() {
-      if (confirm('是否退出?')) {
-        this.$store.dispatch('goLogout');
+      if (confirm("是否退出?")) {
+        this.$store.dispatch("goLogout");
         this.$router.push(this.$route.path);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,11 +1,7 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div
-        class="swiper-slide"
-        v-for="carousel in carouselList"
-        :key="carousel.id"
-      >
+      <div class="swiper-slide" v-for="carousel in carouselList" :key="carousel.id">
         <img :src="carousel.imgUrl" />
       </div>
     </div>
@@ -23,32 +19,24 @@ import Swiper from 'swiper';
 export default {
   name: 'Carousel',
   props: ['carouselList'],
-  watch: {
-    carouselList: {
-      immediate: true,
-      handler() {
-        this.$nextTick(() => {
-          new Swiper('.swiper-container', {
-            loop: true, // 循环模式选项
-            autoplay: true,
-            // 如果需要分页器
-            pagination: {
-              el: '.swiper-pagination',
-              //点击小球的时候也切换图片
-              clickable: true
-            },
-            // 如果需要前进后退按钮
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev'
-            }
-          });
-        });
-      }
-    }
-  }
+  mounted() {
+    new Swiper('.swiper-container', {
+      loop: true, // 循环模式选项
+      autoplay: true,
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+        //点击小球的时候也切换图片
+        clickable: true,
+      },
+      // 如果需要前进后退按钮
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
