@@ -6,7 +6,7 @@ import store from "@/store";
 
 let request = axios.create({
   //基础路径
-  baseURL: "/api",
+  baseURL: "http://gmall-h5-api.atguigu.cn/api",
   //请求不能超过5S
   timeout: 5000,
 });
