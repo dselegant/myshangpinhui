@@ -1,24 +1,5 @@
-# myshangpinhui
+# 访问不了的参考这篇博客
 
-## Project setup
-```
-npm install
-```
+我的网站是https协议，但是接口是http协议，被浏览器阻止了
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[解决Mixed Content: The page at https://xxx was loaded over HTTPS_阿伟你又在打电动的博客-CSDN博客_mixed content: the page at](https://blog.csdn.net/qq_42190001/article/details/125371618)
